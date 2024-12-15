@@ -1,3 +1,6 @@
+Author: Loïc V.
+Date: 15/12/2024
+
 # AuthTool Documentation
 
 AuthTool is a powerful authentication tool that allows you to easily integrate secure login features into your application.
