@@ -40,3 +40,61 @@ Customize the appearance and behavior of the AuthTool button according to your n
 After the user logs in, they will be redirected to your specified redirect_uri with a token. Here is how to handle the callback in PHP and JavaScript:
 
 PHP
+```php
+<?php
+// callback.php
+session_start();
+
+$token = $_GET['token'] ?? null;
+
+if (!$token) {
+    die('Missing token.');
+}
+
+// Vérifiez le token avec l'API
+$response = file_get_contents("https://api.akirasteam.com/?validate_token=$token");
+$data = json_decode($response, true);
+
+if (!$data['success']) {
+    die('Invalid token.');
+}
+
+// Connectez l'utilisateur
+$_SESSION['user_id'] = $data['user_id'];
+$_SESSION['email'] = $data['email'];
+
+// Redirigez vers l'application
+header('Location: /dashboard');
+exit;
+?>
+```
+JavaScript
+```js
+// callback.js
+document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+
+    if (!token) {
+        alert('Missing token.');
+        return;
+    }
+
+    // Vérifiez le token avec l'API
+    fetch(`https://api.akirasteam.com/?validate_token=${token}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Connectez l'utilisateur
+                localStorage.setItem('user_id', data.user_id);
+                localStorage.setItem('email', data.email);
+                window.location.href = '/dashboard';
+            } else {
+                alert('Invalid token.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+});
+```
