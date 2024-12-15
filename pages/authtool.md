@@ -51,7 +51,7 @@ if (!$token) {
     die('Missing token.');
 }
 
-// Vérifiez le token avec l'API
+// Verify the token with the API
 $response = file_get_contents("https://api.akirasteam.com/?validate_token=$token");
 $data = json_decode($response, true);
 
@@ -59,11 +59,11 @@ if (!$data['success']) {
     die('Invalid token.');
 }
 
-// Connectez l'utilisateur
+// Log the user in
 $_SESSION['user_id'] = $data['user_id'];
 $_SESSION['email'] = $data['email'];
 
-// Redirigez vers l'application
+// Redirect to the application
 header('Location: /dashboard');
 exit;
 ?>
@@ -80,12 +80,12 @@ document.addEventListener("DOMContentLoaded", function() {
         return;
     }
 
-    // Vérifiez le token avec l'API
+    // Verify the token with the API
     fetch(`https://api.akirasteam.com/?validate_token=${token}`)
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // Connectez l'utilisateur
+                // Log the user in
                 localStorage.setItem('user_id', data.user_id);
                 localStorage.setItem('email', data.email);
                 window.location.href = '/dashboard';
