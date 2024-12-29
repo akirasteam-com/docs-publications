@@ -23,7 +23,7 @@ To get started with AuthTool, follow these steps:
 Include the AuthTool script in your application:
 
 ```html
-<script src="https://api.akirasteam.com/auth/integration.js"></script>
+<script src="https://api.akirasteam.com/auth2/integration.js"></script>
 ```
 
 ### 3. Adding the AuthTool Element
@@ -55,7 +55,7 @@ if (!$token) {
 }
 
 // Verify the token with the API
-$response = file_get_contents("https://api.akirasteam.com/?validate_token=$token");
+$response = file_get_contents("https://api.akirasteam.com/auth2/?validate_token=$token");
 $data = json_decode($response, true);
 
 if (!$data['success']) {
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Verify the token with the API
-    fetch(`https://api.akirasteam.com/?validate_token=${token}`)
+    fetch(`https://api.akirasteam.com/auth2/?validate_token=${token}`)
         .then(response => response.json())
         .then(data => {
             if (data.success) {
