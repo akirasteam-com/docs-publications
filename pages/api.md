@@ -38,7 +38,7 @@ GET /?action=validate_token&app_id={app_id}&token={token}
 }
 ```
 
-- 2. Getr Login Statistics
+- 2. Get Login Statistics
 Retrieves login statistics for a specific application.
 
 #### Endpoints :
