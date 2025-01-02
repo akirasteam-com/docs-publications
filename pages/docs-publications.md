@@ -1,3 +1,5 @@
+Author: Loïc V. Date: 15/12/2024
+
 # docs-publications
 
 Welcome to the `docs-publications` documentation. This guide will explain how to set up and use the documentation system based on GitHub and PHP.
