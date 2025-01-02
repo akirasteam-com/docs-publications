@@ -10,6 +10,7 @@ The base URL for the API is:
 
 ### Endpoints
 - 1. Validate Token
+
 Validates a fiven token and returns user information based on the specified scope.
 
 #### Endpoints :
