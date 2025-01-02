@@ -45,59 +45,43 @@ After the user logs in, they will be redirected to your specified redirect_uri w
 PHP
 ```php
 <?php
-// callback.php
 session_start();
 
-$token = $_GET['token'] ?? null;
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-if (!$token) {
-    die('Missing token.');
+$token = $_GET['token'] ?? null;
+$app_id = $_GET['app_id'] ?? null;
+
+if (!$token || !$app_id) {
+    die('Missing token or app_id');
 }
 
-// Verify the token with the API
-$response = file_get_contents("https://api.akirasteam.com/auth2/?validate_token=$token");
+$api_url = "https://api.akirasteam.com/auth2/?action=validate_token&token=" . urlencode($token) . "&app_id=" . urlencode($app_id);
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $api_url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$response = curl_exec($ch);
+
+if (curl_errno($ch)) {
+    $error_msg = curl_error($ch);
+    curl_close($ch);
+    die('Failed to connect to API: ' . $error_msg);
+}
+
+curl_close($ch);
+
 $data = json_decode($response, true);
 
-if (!$data['success']) {
-    die('Invalid token.');
+if (!$data || $data['status'] !== 'success') {
+    die('Invalid token or app_id');
 }
 
-// Log the user in
-$_SESSION['user_id'] = $data['user_id'];
-$_SESSION['email'] = $data['email'];
+$_SESSION['user_id'] = $data['data']['user']['id'];
+$_SESSION['user_email'] = $data['data']['user']['email'];
 
-// Redirect to the application
-header('Location: /dashboard');
-exit;
+header('location: panel.php');
+exit();
 ?>
-```
-JavaScript
-```js
-// callback.js
-document.addEventListener("DOMContentLoaded", function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token');
-
-    if (!token) {
-        alert('Missing token.');
-        return;
-    }
-
-    // Verify the token with the API
-    fetch(`https://api.akirasteam.com/auth2/?validate_token=${token}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Log the user in
-                localStorage.setItem('user_id', data.user_id);
-                localStorage.setItem('email', data.email);
-                window.location.href = '/dashboard';
-            } else {
-                alert('Invalid token.');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-});
 ```
