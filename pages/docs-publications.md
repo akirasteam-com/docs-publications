@@ -1,4 +1,5 @@
-Author: Loïc V. Date: 15/12/2024
+Author: Loïc V.
+Date: 15/12/2024
 
 # docs-publications
 
