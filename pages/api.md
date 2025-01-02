@@ -1,4 +1,5 @@
-Author: Loïc V. Date: 02/01/2025
+Author: Loïc V.
+Date: 02/01/2025
 
 # AkirasTeam API Documentation
 
