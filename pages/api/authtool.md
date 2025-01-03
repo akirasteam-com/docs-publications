@@ -1,9 +1,8 @@
 Author: Loïc V.
 Date: 02/01/2025
 
-# AkirasTeam API Documentation
+# AuthTool API Documentation
 
-## AuthTool API Documentation
 ### Introduction
 This document provides an example of how to use the AuthTool API. The API allows you to validate tokens, retrieve login statistics, and authenticate users.
 
