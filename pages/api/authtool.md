@@ -8,7 +8,7 @@ This document provides an example of how to use the AuthTool API. The API allows
 
 ### Base URL
 The base URL for the API is:
-> `https://api.akirasteam.com/auth2/`
+> `https://api.akirasteam.com/auth/2`
 
 ### Endpoints
 - 1. Validate Token
@@ -34,7 +34,7 @@ GET /?action=validate_token&app_id={app_id}&token={token}
             "id": "user_id",
             "name": "user_name",
             "email": "user_email",
-            "avatar": "https://api.akirasteam.com/src/imgs/pdp_default.png"
+            "avatar": "https://app.akirasteam.com/uploads/pdp_default.png"
         },
         "is_admin": true
     }
