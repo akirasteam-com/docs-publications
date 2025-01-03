@@ -23,7 +23,7 @@ To get started with AuthTool, follow these steps:
 Include the AuthTool script in your application:
 
 ```html
-<script src="https://api.akirasteam.com/auth2/integration.js"></script>
+<script src="https://api.akirasteam.com/auth/2/script.js"></script>
 ```
 
 ### 3. Adding the AuthTool Element
@@ -57,7 +57,7 @@ if (!$token || !$app_id) {
     die('Missing token or app_id');
 }
 
-$api_url = "https://api.akirasteam.com/auth2/?action=validate_token&token=" . urlencode($token) . "&app_id=" . urlencode($app_id);
+$api_url = "https://api.akirasteam.com/auth/2/?action=validate_token&token=" . urlencode($token) . "&app_id=" . urlencode($app_id);
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $api_url);
